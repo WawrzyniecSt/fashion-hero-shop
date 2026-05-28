@@ -7,8 +7,10 @@ import { SearchIcon, UserIcon, CartIcon, MenuIcon, CloseIcon, HeartIcon } from "
 import { SearchModal } from "./search-modal";
 import { MegaMenuNav, MobileMegaMenuContent } from "./mega-menu";
 import { useAuth } from "./auth-provider";
+import { BarChart3 } from "lucide-react";
 
 const secondaryLinks = [
+  { label: "Sellers panel", href: "/seller" },
   { label: "About", href: "/about" },
 ];
 
@@ -38,7 +40,7 @@ export function Header({ onCartOpen, cartCount = 0, wishlistCount = 0 }: HeaderP
         {/* Logo */}
         <Link href="/" className="mr-8">
           <span className="text-xl font-semibold italic tracking-tight text-charcoal">
-            FashionHero
+            Allbirds
           </span>
         </Link>
 
@@ -47,15 +49,19 @@ export function Header({ onCartOpen, cartCount = 0, wishlistCount = 0 }: HeaderP
 
         {/* Right side icons */}
         <div className="flex items-center gap-3 ml-auto">
-          {secondaryLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="hidden lg:block text-[12px] text-charcoal hover:opacity-60 transition-opacity"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/seller"
+            className="hidden lg:flex items-center gap-1.5 text-[12px] font-medium text-charcoal hover:opacity-60 transition-opacity"
+          >
+            <BarChart3 className="h-3.5 w-3.5" />
+            Sellers panel
+          </Link>
+          <Link
+            href="/about"
+            className="hidden lg:block text-[12px] text-charcoal hover:opacity-60 transition-opacity"
+          >
+            About
+          </Link>
           <button
             aria-label="Search"
             className="p-1 hover:opacity-60 transition-opacity"
@@ -112,16 +118,21 @@ export function Header({ onCartOpen, cartCount = 0, wishlistCount = 0 }: HeaderP
       >
         <div className="px-4 py-4 space-y-1 border-t border-black/5">
           <MobileMegaMenuContent onLinkClick={() => setMobileMenuOpen(false)} />
-          {secondaryLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block text-sm py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/seller"
+            className="flex items-center gap-1.5 text-sm py-2 font-medium"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <BarChart3 className="h-4 w-4" />
+            Sellers panel
+          </Link>
+          <Link
+            href="/about"
+            className="block text-sm py-2"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            About
+          </Link>
         </div>
       </div>
 

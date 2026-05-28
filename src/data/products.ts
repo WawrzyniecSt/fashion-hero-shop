@@ -3511,8 +3511,8 @@ export function getProductsBySeller(sellerSlug: string): Product[] {
 export const heroSlides: HeroSlide[] = [
   {
     id: "1",
-    subtitle: "DISCOVER 4,000+ SELLERS",
-    title: "Your Style. Their Craft.",
+    subtitle: "ALL NEW DASHER NZ COLLECTION",
+    title: "Wildly Comfortable. Super Natural.",
     image: "/images/hero/hero-1.jpg",
     ctaLinks: [
       { label: "SHOP MEN", href: "/collections/mens" },
@@ -3521,17 +3521,18 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: "2",
-    subtitle: "NEW ON FASHIONHERO",
-    title: "Fresh brands. Unique finds.",
+    subtitle: "CANVAS CRUISER COLLECTION",
+    title: "Easy on the eyes. Easier on the feet.",
     image: "/images/hero/hero-2.jpg",
     ctaLinks: [
-      { label: "SHOP NEW ARRIVALS", href: "/collections/new-arrivals" },
+      { label: "SHOP MEN", href: "/collections/mens" },
+      { label: "SHOP WOMEN", href: "/collections/womens" },
     ],
   },
   {
     id: "3",
-    subtitle: "FASHION MARKETPLACE",
-    title: "From indie designers to top brands. All in one place.",
+    subtitle: "SUSTAINABLE COMFORT",
+    title: "Made from nature. Designed for everyday.",
     image: "/images/hero/hero-3.jpg",
     ctaLinks: [
       { label: "EXPLORE ALL", href: "/collections/all" },

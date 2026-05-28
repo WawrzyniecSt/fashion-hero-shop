@@ -1,35 +1,29 @@
 const props = [
   {
-    label: "DISCOVERY",
-    title: "Thousands Of Sellers, One Search",
+    title: "Wear All Day Comfort",
     description:
-      "From top brands to independent designers - find exactly what you're looking for across thousands of curated sellers.",
+      "Lightweight, bouncy, and wildly comfortable, Allbirds shoes make any outing feel effortless. Slip in, lace up, or slide them on and enjoy the comfy support.",
   },
   {
-    label: "TRUST",
-    title: "Verified Sellers, Real Reviews",
+    title: "Sustainability In Every Step",
     description:
-      "Every seller on FashionHero is vetted. Real customer reviews and our Pro seller program help you shop with confidence.",
+      "From materials to transport, we're working to reduce our carbon footprint to near zero. Holding ourselves accountable and striving for climate goals isn't a 30-year goal—it's now.",
   },
   {
-    label: "VARIETY",
-    title: "From Streetwear To Sustainable",
+    title: "Materials From The Earth",
     description:
-      "Premium brands, vintage finds, handmade originals, everyday basics. Whatever your style, it's here.",
+      "We replace petroleum-based synthetics with natural alternatives wherever we can. Like using wool, tree fiber, and sugarcane. They're soft, breathable, and better for the planet—win, win, win.",
   },
 ];
 
 export function ValueProps() {
   return (
-    <section className="px-4 md:px-8 lg:px-12 py-16 bg-cream-light">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto text-center">
+    <section className="py-16 md:py-24 bg-white">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto text-center px-6">
         {props.map((prop) => (
-          <div key={prop.label}>
-            <p className="text-[11px] font-medium uppercase tracking-[0.8px] text-warm-gray mb-2">
-              {prop.label}
-            </p>
-            <h3 className="text-lg font-normal text-charcoal mb-3">{prop.title}</h3>
-            <p className="text-sm text-warm-gray leading-relaxed">{prop.description}</p>
+          <div key={prop.title}>
+            <h3 className="text-base md:text-lg font-normal text-[#1a1a1a] mb-3">{prop.title}</h3>
+            <p className="text-sm text-[#6b6b6b] leading-relaxed">{prop.description}</p>
           </div>
         ))}
       </div>

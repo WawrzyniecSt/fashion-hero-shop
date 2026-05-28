@@ -9,9 +9,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "FashionHero — Comfortable, Sustainable Shoes",
+  title: "Allbirds: Comfortable, Sustainable Shoes & Apparel",
   description:
-    "Sustainable, supportive, and wildly comfortable shoes made from natural materials.",
+    "Sustainable, supportive, and wildly comfortable shoes made from natural materials like merino wool, eucalyptus fiber, and sugarcane.",
 };
 
 export default function RootLayout({

@@ -1,87 +1,253 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { products } from "@/data/products";
-import { ProductCard } from "@/components/product-card";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-type Tab = "new-arrivals" | "best-sellers";
-
-const tabs: { label: string; value: Tab }[] = [
-  { label: "NEW ARRIVALS", value: "new-arrivals" },
-  { label: "BEST SELLERS", value: "best-sellers" },
+const largeProducts = [
+  {
+    name: "Canvas Cruiser",
+    color: "Burnt Olive (Natural White Sole)",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-canvas-olive.png",
+    links: [
+      { label: "Shop Men", href: "/collections/mens" },
+      { label: "Shop Women", href: "/collections/womens" },
+    ],
+  },
+  {
+    name: "Cruiser Slip On Canvas",
+    color: "Deep Navy Stripes (Blizzard Sole)",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-slip-navy.png",
+    links: [],
+  },
+  {
+    name: "Dasher NZ",
+    color: "Seagrass (Parchment Sole)",
+    price: "$135",
+    image: "/images/allbirds/prod-dasher-nz-seagrass.png",
+    links: [],
+  },
+  {
+    name: "Canvas Cruiser",
+    color: "Auburn (Warm White Sole)",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-canvas-auburn.png",
+    links: [],
+  },
+  {
+    name: "Cruiser Jersey",
+    color: "Light Grey/Anthracite (Blizzard Sole)",
+    price: "$110",
+    image: "/images/allbirds/prod-cruiser-jersey.png",
+    links: [],
+  },
+  {
+    name: "Canvas Cruiser",
+    color: "Chestnut (Natural White Sole)",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-canvas-chestnut.png",
+    links: [],
+  },
+  {
+    name: "Allbirds Flip Flop",
+    color: "Mid Yellow",
+    price: "$35",
+    image: "/images/allbirds/prod-flip-flop-yellow.png",
+    links: [],
+  },
+  {
+    name: "Dasher NZ Relay",
+    color: "Seagrass (Parchment Sole)",
+    price: "$145",
+    image: "/images/allbirds/prod-dasher-nz-relay.png",
+    links: [],
+  },
+  {
+    name: "Varsity Jersey",
+    color: "Light Grey/Syrah (Blizzard Sole)",
+    price: "$100",
+    image: "/images/allbirds/prod-varsity-jersey.png",
+    links: [],
+  },
+  {
+    name: "Breezer Mary Jane",
+    color: "Dusty Pink (Dusty Pink Sole)",
+    price: "$115",
+    image: "/images/allbirds/prod-breezer-mary-jane.png",
+    links: [],
+  },
 ];
 
-export function ProductCarousel() {
-  const [activeTab, setActiveTab] = useState<Tab>("new-arrivals");
-  const scrollRef = useRef<HTMLDivElement>(null);
+const smallProducts = [
+  {
+    name: "Canvas Runner NZ",
+    color: "Deep Navy Stripes",
+    price: "$100",
+    image: "/images/allbirds/prod-runner-nz-canvas.png",
+    badge: "New Color",
+  },
+  {
+    name: "Tree Glider",
+    color: "Burlwood",
+    price: "$140",
+    image: "/images/allbirds/prod-tree-glider.png",
+    badge: "New Color",
+  },
+  {
+    name: "Canvas Cruiser",
+    color: "Sea Spray",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-sea-spray.png",
+    badge: null,
+  },
+  {
+    name: "Breezer Mary Jane",
+    color: "Dusty Pink",
+    price: "$115",
+    image: "/images/allbirds/prod-breezer-mary-jane.png",
+    badge: "New Color",
+  },
+  {
+    name: "Dasher NZ",
+    color: "Seagrass",
+    price: "$135",
+    image: "/images/allbirds/prod-dasher-nz-seagrass.png",
+    badge: "New Color",
+  },
+  {
+    name: "Cruiser Slip On Terry",
+    color: "Ochre/Warm White",
+    price: "$110",
+    image: "/images/allbirds/prod-cruiser-slip-terry.png",
+    badge: "NEW",
+  },
+  {
+    name: "Canvas Cruiser",
+    color: "Stormy Lilac",
+    price: "$75",
+    image: "/images/allbirds/prod-cruiser-stormy-lilac.png",
+    badge: null,
+  },
+];
 
-  const filtered = products.filter((p) => p.collections.includes(activeTab));
+function ProductScrollCarousel({
+  items,
+  large = false,
+}: {
+  items: typeof largeProducts | typeof smallProducts;
+  large?: boolean;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
-    const amount = 300;
     scrollRef.current.scrollBy({
-      left: direction === "left" ? -amount : amount,
+      left: direction === "left" ? -400 : 400,
       behavior: "smooth",
     });
   };
 
   return (
-    <section className="py-12">
-      {/* Section heading */}
-      <h2 className="text-[40px] font-normal text-charcoal text-center mb-2">
-        Our Favorites
-      </h2>
+    <div className="relative group/carousel">
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-2 top-1/3 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden md:flex"
+        aria-label="Scroll left"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
 
-      {/* Tab buttons */}
-      <div className="flex justify-center gap-6 mb-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.value}
-            onClick={() => setActiveTab(tab.value)}
-            className={`text-[12px] font-medium uppercase tracking-[0.5px] pb-1 border-b-2 transition-colors ${
-              activeTab === tab.value
-                ? "border-charcoal text-charcoal"
-                : "border-transparent text-warm-gray hover:text-charcoal"
-            }`}
+      <div
+        ref={scrollRef}
+        className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4 md:px-8 lg:px-16"
+      >
+        {items.map((product, i) => (
+          <Link
+            key={product.name + i}
+            href="/collections/all"
+            className={`flex-shrink-0 group ${large ? "min-w-[280px] md:min-w-[340px]" : "min-w-[200px] md:min-w-[240px]"}`}
           >
-            {tab.label}
-          </button>
+            <div className={`relative overflow-hidden bg-[#f5f4f1] ${large ? "aspect-square" : "aspect-square"}`}>
+              <Image
+                src={product.image}
+                alt={`${product.name} - ${product.color}`}
+                fill
+                className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+              />
+              {"badge" in product && product.badge && (
+                <span className="absolute top-3 left-3 bg-[#1a1a1a] text-white text-[9px] font-semibold uppercase tracking-[0.8px] px-2 py-1">
+                  {product.badge}
+                </span>
+              )}
+            </div>
+            <div className="pt-3">
+              <h4 className={`font-normal text-[#1a1a1a] ${large ? "text-sm" : "text-sm"}`}>
+                {product.name}
+              </h4>
+              <p className="text-xs text-[#6b6b6b] mt-0.5">{product.color}</p>
+              <p className="text-sm font-normal text-[#1a1a1a] mt-1">{product.price}</p>
+            </div>
+          </Link>
         ))}
       </div>
 
-      {/* Scrollable row with nav buttons */}
-      <div className="relative px-4 md:px-8 lg:px-12">
-        <button
-          onClick={() => scroll("left")}
-          className="absolute left-2 top-1/3 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-sm hidden md:flex items-center justify-center"
-          aria-label="Scroll left"
-        >
-          <ChevronLeftIcon />
-        </button>
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-2 top-1/3 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md opacity-0 group-hover/carousel:opacity-100 transition-opacity hidden md:flex"
+        aria-label="Scroll right"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </div>
+  );
+}
 
-        <div
-          ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
-        >
-          {filtered.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              className="min-w-[220px] max-w-[220px] flex-shrink-0"
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={() => scroll("right")}
-          className="absolute right-2 top-1/3 -translate-y-1/2 z-10 bg-white/90 hover:bg-white rounded-full p-2 shadow-sm hidden md:flex items-center justify-center"
-          aria-label="Scroll right"
-        >
-          <ChevronRightIcon />
-        </button>
+export function ProductCarousel() {
+  return (
+    <section className="py-12 md:py-16">
+      <div className="px-4 md:px-8 lg:px-16 mb-6">
+        <p className="text-[11px] font-medium uppercase tracking-[0.8px] text-[#6b6b6b] mb-1">
+          New Arrivals
+        </p>
       </div>
+
+      <ProductScrollCarousel items={largeProducts} large />
+
+      <div className="px-4 md:px-8 lg:px-16 mt-6 flex items-center justify-between">
+        <div>
+          <h3 className="text-lg md:text-xl font-normal text-[#1a1a1a]">
+            Canvas Cruiser
+          </h3>
+          <p className="text-sm text-[#6b6b6b]">
+            Burnt Olive (Natural White Sole) — $75
+          </p>
+        </div>
+        <div className="flex gap-3">
+          <Link
+            href="/collections/mens"
+            className="text-[11px] font-medium uppercase tracking-[0.6px] text-[#1a1a1a] underline underline-offset-4 hover:opacity-60"
+          >
+            Shop Men
+          </Link>
+          <Link
+            href="/collections/womens"
+            className="text-[11px] font-medium uppercase tracking-[0.6px] text-[#1a1a1a] underline underline-offset-4 hover:opacity-60"
+          >
+            Shop Women
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-16 px-4 md:px-8 lg:px-16 mb-6">
+        <p className="text-[11px] font-medium uppercase tracking-[0.8px] text-[#6b6b6b] mb-1">
+          New Arrivals
+        </p>
+      </div>
+
+      <ProductScrollCarousel items={smallProducts} />
     </section>
   );
 }
